@@ -10,7 +10,7 @@ function onKeyDown(event) {
             case 'ArrowLeft':
                 gsap.to(stick.proto, {
                     duration: .04,
-                    left: stick.proto.offsetLeft-4
+                    left: stick.proto.offsetLeft-12
                 })
                 break
             case 'd':
@@ -19,7 +19,7 @@ function onKeyDown(event) {
             case 'ArrowRight':
                 gsap.to(stick.proto, {
                     duration: .04,
-                    left: stick.proto.offsetLeft+4
+                    left: stick.proto.offsetLeft+12
                 })
                 break
     }
@@ -44,7 +44,7 @@ class Sprite {
         this.height = height
 
         // this.proto.style.background = `url(${this.src})`,
-        this.proto.style.left = Math.random() * 100 + "%";
+        this.proto.style.left = (Math.random() * (window.innerWidth - this.width)) + "px";
 
         this.proto.style.width = `${width}px`
         this.proto.style.height = `${height}px`
@@ -99,8 +99,8 @@ class Hero extends Sprite {
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
-                    scope.proto.style.display = 'none'
-                    revealSlice(getComputedStyle(scope.proto).getPropertyValue('background'))
+                    revealSlice(getComputedStyle(scope.proto).getPropertyValue('background')),
+                    scope.proto.style.top = '-32px'
                     delete this
                     gameOver()
                 }
@@ -173,6 +173,15 @@ let summonBox = null
 
 function startGame()
 {
+    stickPositions.splice(0, stickPositions.length)
+    document.querySelector('.overlay').style.display = 'none'
+    window.addEventListener('keydown', onKeyDown),
+    [...document.querySelectorAll('.slice')].forEach(slice => {slice.classList.add('hidden')}),
+    [...document.querySelectorAll('.box')].forEach(box => {
+        box.classList.add('unclaimed')
+        box.style.top = "-32px"
+    })
+
     const totalBoxes = document.querySelectorAll(".box").length,
           totalRats = document.querySelectorAll(".box.rat-box"),
           totalHeroes = document.querySelectorAll(".box.hero-box").length,
@@ -211,12 +220,17 @@ function startGame()
 
 startGame()
 
+document.querySelector('.restart').addEventListener('click', startGame)
+
 const overlay = document.querySelector('.overlay')
 
 function clean() {
     window.removeEventListener("keydown", onKeyDown)
     if(summonBox)
+    {
         clearInterval(summonBox)
+        summonBox = null
+    }
     gsap.getTweensOf('.box').forEach(tween => {
         tween.kill()
     })
@@ -226,6 +240,7 @@ function clean() {
 function success()
 {
     clean()
+    document.querySelector('.gameover-message').addClass('hidden')
     overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
     overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
 }
