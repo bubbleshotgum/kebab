@@ -27,17 +27,14 @@ class Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            y: "95vh",
+            top: "95vh",
             onUpdate() {
-                console.log(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop)
-                if(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop && (
-                    stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
-                ||  scope.offsetLeft <= stick.offsetLeft + stick.offsetWidth 
-                ))
+                if(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop
+                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
                 {
                     console.log("Hello")
                     fallAnimation.pause(), fallAnimation.kill()
-                    stickPositions.append(0)
+                    stickPositions.push(0)
                     if(stickPositions.length === 7)
                         success()
                 }
@@ -55,13 +52,12 @@ class Hero extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            y: "95vh",
+            top: "95vh",
             onUpdate() {
-                if(stick.proto.offsetHeight <= scope.proto.offsetHeight + scope.proto.offsetTop && (
-                    stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
-                ||  scope.offsetLeft <= stick.offsetLeft + stick.offsetWidth 
-                ))
+                if(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop
+                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
                 {
+                    console.log("ew")
                     fallAnimation.pause(), fallAnimation.kill()
                     gameOver()
                 }
@@ -89,15 +85,14 @@ class Meat extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            y: "95vh",
+            top: "95vh",
             onUpdate() {
-                if(stick.proto.offsetHeight <= scope.proto.offsetHeight + scope.proto.offsetTop && (
-                    stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
-                ||  scope.offsetLeft <= stick.offsetLeft + stick.offsetWidth 
-                ))
+                if(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop
+                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
                 {
+                    console.log("Ahh")
                     fallAnimation.pause(), fallAnimation.kill()
-                    stickPositions.append(1)
+                    stickPositions.push(1)
                     if(stickPositions.length === 7)
                         success()
                 }
@@ -128,8 +123,6 @@ function clean() {
 function success()
 {
     clean()
-    for(let i = 0; i < 7; i++)
-        stickPositions.push(1)
     overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
     overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
 }

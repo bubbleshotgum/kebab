@@ -23,6 +23,7 @@ main, .overlay {
 
 .box {
     width: 32px;
+    display: inline-block;
     height: 32px;
     top: -32px
 }
