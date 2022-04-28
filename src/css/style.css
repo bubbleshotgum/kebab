@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+main {
+    position: relative;
+    background: #afcfff
+}
+
+main, .overlay {
+    width: 100vw;
+    height: 100vh
+}
+
+.scenery {
+    width: 100%;
+    height: 10%;
+    background: #99dd99;
+    bottom: 0;
+    z-index: 10
+}
+
+.box {
+    width: 32px;
+    height: 32px;
+    top: -32px
+}
+
+.rat-box, .tomato-box {background:#efefef}
+.hero-box {background:#dd0000}
+.meat-box {background:#00dd00}
+
+.player-stick, .box, .scenery {position: absolute}
+
+.player-stick { 
+    width: 24px;
+    height: 154px;
+    background: #bebebe;
+    bottom: 10%;
+    left: 47%
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    /* z-index: 100; */
+    background: #111;
+    opacity: .7;
+}
+
+.end-screen {
+    margin: auto;
+    width: 70%;
+    height: 50%;
+    border: 2px solid darkgreen;
+    background: #fff;
+    z-index: 100;
+    opacity: 1
+}
+
+.overlay, .end-screen, .success-message, .gameover-message {display: none}
+
+.success-message, .gameover-message {
+    padding: 25px;
+}

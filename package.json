@@ -1,0 +1,17 @@
+{
+  "name": "kebabjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack --config webpack.config.js --watch",
+    "build": "webpack --config webpack.build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gsap": "^3.10.4",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
