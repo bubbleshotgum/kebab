@@ -5,18 +5,18 @@ class MeatStick {constructor(){this.proto=document.querySelector('.player-stick'
 
 const stickPositions = []
 const stick = new MeatStick()
-const duration = 7
+const duration = 5
 
 class Sprite {
     constructor(proto, width = 32, height = 32) {
-        console.log(proto)
-
         this.proto = proto
         // this.src = src
         this.width = width
         this.height = height
 
         // this.proto.style.background = `url(${this.src})`,
+        this.proto.style.left = Math.random() * 100 + "%";
+
         this.proto.style.width = `${width}px`
         this.proto.style.height = `${height}px`
 
@@ -27,13 +27,15 @@ class Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            y: 90,
+            y: "95vh",
             onUpdate() {
-                if(stick.proto.offsetHeight <= scope.proto.offsetHeight + scope.proto.offsetTop && (
+                console.log(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop)
+                if(stick.proto.offsetTop <= scope.proto.offsetHeight + scope.proto.offsetTop && (
                     stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
                 ||  scope.offsetLeft <= stick.offsetLeft + stick.offsetWidth 
                 ))
                 {
+                    console.log("Hello")
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.append(0)
                     if(stickPositions.length === 7)
@@ -46,18 +48,14 @@ class Sprite {
 class Hero extends Sprite {
     constructor(width = 32, height = 32)
     {
-        super({
-            proto: document.querySelector('.hero-box'),
-            width,
-            height
-        })
+        super(document.querySelector('.hero-box'), width, height)
     }
 
     fall() {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            y: "90%",
+            y: "95vh",
             onUpdate() {
                 if(stick.proto.offsetHeight <= scope.proto.offsetHeight + scope.proto.offsetTop && (
                     stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
@@ -74,36 +72,24 @@ class Hero extends Sprite {
 class Dummy extends Sprite {}
 class Rat extends Dummy {
     constructor(width = 32, height = 32) {
-        super({
-            proto: document.querySelector('.rat-box'),
-            width,
-            height
-        })
+        super(document.querySelector('.rat-box'), width, height)
     }
 }
 class Tomato extends Dummy {
     constructor(width = 32, height = 32) {
-        super({
-            proto: document.querySelector('.tomato-box'),
-            width,
-            height
-        })
+        super(document.querySelector('.tomato-box'), width, height)
     }
 }
 class Meat extends Sprite {
     constructor(width = 32, height = 32) {
-        super({
-            proto: document.querySelector('.meat-box'),
-            width,
-            height
-        })
+        super(document.querySelector('.meat-box'), width, height)
     }
 
     fall() {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            yPercent: 90,
+            y: "95vh",
             onUpdate() {
                 if(stick.proto.offsetHeight <= scope.proto.offsetHeight + scope.proto.offsetTop && (
                     stick.offsetLeft <= scope.offsetLeft + scope.offsetWidth 
