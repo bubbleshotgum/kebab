@@ -240,8 +240,8 @@ function clean() {
 function success()
 {
     clean()
-    document.querySelector('.gameover-message').addClass('hidden')
     overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
+    overlay.children[0].children[1].style.display = "none"
     overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
 }
 
