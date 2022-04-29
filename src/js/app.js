@@ -77,7 +77,7 @@ class Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${window.innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight}px`,
             onUpdate() {
                 if(scope.ifCollides())
                 {
@@ -112,7 +112,7 @@ class Hero extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${window.innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight}px`,
             onUpdate() {
                 if(scope.ifCollides())
                 {
@@ -174,7 +174,7 @@ class Meat extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${window.innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight}px`,
             onUpdate() {
                 if(scope.ifCollides())
                 {
