@@ -325,6 +325,10 @@ body {
     bottom: -100px;
     transform: scale(-1, 1);
 }
+.mo-fire--smoke{
+    width: 100%;
+    height: auto;
+}
 .mo-fire svg {
     width: 100%;
     height: auto;
@@ -336,6 +340,11 @@ body {
     position: relative
 }
 .mo-fire--three svg {
+    width: 100%;
+    height: auto;
+    position: relative
+}
+.mo-fire--smoke svg {
     width: 100%;
     height: auto;
     position: relative
@@ -424,6 +433,87 @@ body {
     }
 }
 
+
+/* overlay_form */
+.overlay_form {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #48EAFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.overlay_form-fire {
+    width: 100px;
+    height: 100px;
+}
+.overlay_form-fire img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.overlay_form-kebab {
+    width: 340px;
+    height: 50px;
+    background: rgb(165, 108, 86);
+    margin-bottom: 20px;
+}
+.overlay_form-title {
+    font-size: 36px;
+    text-align: center;
+    line-height: 96%;
+    margin-bottom: 20px;
+}
+form {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input {
+    font-family: "Dinpro_medium";
+    width: 100%;
+    padding: 0 10px;
+    height: 40px;
+    font-size: 24px;
+    text-transform: uppercase;
+    border-radius: 30px;
+    border: 2px solid #000;
+    transition: .3s;
+    background: #fff;
+    cursor: pointer;  
+    margin-bottom: 10px;
+}
+label {
+    font-family: "Dinpro_light";
+    font-size: 24px;
+}
+
+.form_btn {
+    margin-top: 10px;
+    font-family: "Dinpro_light";
+    width: 160px;
+    height: 40px;
+    text-transform: uppercase;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 2px solid #000;
+    transition: .3s;
+    background: #fff;
+    cursor: pointer;
+    transition: .2s;
+}
+.form_btn:hover {
+    transition: .2s;
+    transform: scale(1.07);
+}
 /* media================ */
 
 @media(max-width: 900px) {
