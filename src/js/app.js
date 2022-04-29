@@ -36,19 +36,18 @@ const stick = new MeatStick()
 const duration = 5
 
 class Sprite {
-    constructor(proto, width = 32, height = 32) {
+    constructor(proto, src, width = 64, height = 64) {
         this.proto = proto
+
         this.proto.classList.remove('unclaimed')
-        // this.src = src
-        this.width = width
-        this.height = height
-
-        // this.proto.style.background = `url(${this.src})`,
-        this.proto.style.left = (Math.random() * (window.innerWidth - this.width)) + "px";
-
         this.proto.style.width = `${width}px`
         this.proto.style.height = `${height}px`
+        this.proto.style.left = (Math.random() * (window.innerWidth - width)) + "px"
+        this.proto.style.background = `${src} center center no-repeat`
+        this.proto.style.backgroundSize = 'contain'
 
+        this.width = width,
+        this.height = height
         this.fall()
     }
 
@@ -62,10 +61,10 @@ class Sprite {
                 && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
-                    const proto = scope.proto
+                    const proto = scope.proto, height = scope.height
                     delete this
                     proto.classList.add('unclaimed')
-                    proto.style.top = "-32px"
+                    proto.style.top = `-${height}px`
                     stickPositions.push(0)
                     revealSlice(getComputedStyle(proto).getPropertyValue('background'))
                     if(stickPositions.length === 7)
@@ -74,18 +73,18 @@ class Sprite {
             },
             onComplete() {
                 fallAnimation.kill()
-                const proto = scope.proto
+                const proto = scope.proto, height = scope.height
                 delete this
                 proto.classList.add('unclaimed')
-                proto.style.top = "-32px"
+                proto.style.top = `-${height}px`
             }
         })
     }
 }
 class Hero extends Sprite {
-    constructor(width = 32, height = 32)
+    constructor(width, height)
     {
-        super(document.querySelector('.hero-box.unclaimed'), width, height)
+        super(document.querySelector('.hero-box.unclaimed'), "url('/assets/char.png')", width, height)
     }
 
     fall() {
@@ -100,36 +99,55 @@ class Hero extends Sprite {
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
                     revealSlice(getComputedStyle(scope.proto).getPropertyValue('background')),
-                    scope.proto.style.top = '-32px'
+                    scope.proto.style.top = `-${scope.height}px`
                     delete this
                     gameOver()
                 }
             },
             onComplete() {
                 fallAnimation.kill()
-                const proto = scope.proto
+                const proto = scope.proto, height = scope.height
                 delete this
                 proto.classList.add('unclaimed')
-                proto.style.top = "-32px"
+                proto.style.top = `-${height}px`
             }
         })
     }
 }
-class Dummy extends Sprite {}
+class Dummy extends Sprite {
+    constructor(src) {
+        super(document.querySelector('.stuff-box.unclaimed'), src)
+    }
+}
 class Rat extends Dummy {
-    constructor(width = 32, height = 32) {
-        super(document.querySelector('.rat-box.unclaimed'), width, height)
+    constructor() {
+        super("url('/assets/mouse.png')")
+    }
+}
+class Crow extends Dummy {
+    constructor() {
+        super("url('/assets/crow.png')")
+    }
+}
+class Poo extends Dummy {
+    constructor() {
+        super("url('/assets/poo.png')")
     }
 }
 class Tomato extends Dummy {
-    constructor(width = 32, height = 32) {
-        super(document.querySelector('.tomato-box.unclaimed'), width, height)
+    constructor() {
+        super("url('/assets/tomato.png')")
+    }
+}
+class Onion extends Dummy {
+    constructor() {
+        super("url('/assets/onion.png')")
     }
 }
 class Meat extends Sprite {
-    constructor(width = 32, height = 32)
+    constructor(width, height)
     {
-        super(document.querySelector('.meat-box.unclaimed'), width, height)
+        super(document.querySelector('.meat-box.unclaimed'), "url('/assets/meat.png')", width, height)
     }
 
     fall() {
@@ -142,10 +160,10 @@ class Meat extends Sprite {
                 && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
-                    const proto = scope.proto
+                    const proto = scope.proto, height = scope.height
                     delete this
                     proto.classList.add('unclaimed')
-                    proto.style.top = "-32px";
+                    proto.style.top = `-${height}px`;
                     stickPositions.push(1)
                     revealSlice(getComputedStyle(proto).getPropertyValue('background'))
                     if(stickPositions.length === 7)
@@ -154,10 +172,10 @@ class Meat extends Sprite {
             },
             onComplete() {
                 fallAnimation.kill()
-                const proto = scope.proto
+                const proto = scope.proto, height = scope.height
                 delete this
                 proto.classList.add('unclaimed')
-                proto.style.top = "-32px";
+                proto.style.top = `-${height}px`;
             }
         })
     }
@@ -179,14 +197,13 @@ function startGame()
     [...document.querySelectorAll('.slice')].forEach(slice => {slice.classList.add('hidden')}),
     [...document.querySelectorAll('.box')].forEach(box => {
         box.classList.add('unclaimed')
-        box.style.top = "-32px"
+        box.style.top = `-${getComputedStyle(box).getPropertyValue('height')}`
     })
 
     const totalBoxes = document.querySelectorAll(".box").length,
-          totalRats = document.querySelectorAll(".box.rat-box"),
+          totalStuff = document.querySelectorAll(".box.stuff-box").length,
           totalHeroes = document.querySelectorAll(".box.hero-box").length,
-          totalMeat = document.querySelectorAll(".box.meat-box").length,
-          totalTomatoes = document.querySelectorAll(".box.tomato-box").length
+          totalMeat = document.querySelectorAll(".box.meat-box").length
     
     if(! summonBox)
     summonBox = setInterval(() =>
@@ -194,19 +211,19 @@ function startGame()
         let prob = Math.random() * totalBoxes
         switch(true)
         {
-            case prob > totalHeroes + totalMeat + (Math.random() > .5 ? totalTomatoes : totalRats):
+            case prob > totalHeroes + totalMeat + totalStuff / 2:
                 try {
                     new Hero()
                 } catch(e) { console.warn(e) }
                 break
             case prob > totalHeroes + totalMeat:
                 try {
-                    new Rat()
+                    Math.random() > .5 ? new Rat() : Math.random() > .5 ? new Poo() : new Crow()
                 } catch(e) { console.warn(e) }
                 break
             case prob > totalHeroes:
                 try {
-                    new Tomato()
+                    Math.random() > .5 ? new Tomato() : new Onion()
                 } catch(e) { console.warn(e) }
                 break
             default:

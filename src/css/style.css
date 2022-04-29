@@ -23,7 +23,7 @@ main, .overlay {
 
 .box {top: -32px}
 
-.rat-box, .tomato-box {background:#efefef}
+.stuff-box, .tomato-box {background:#efefef}
 .hero-box {background:#dd0000}
 .meat-box {background:#00dd00}
 
@@ -32,7 +32,8 @@ main, .overlay {
 .player-stick { 
     width: 24px;
     height: 200px;
-    background: #bebebe;
+    background: #bebebe url("/assets/hand.png") center center no-repeat;
+    background-size: cover;
     bottom: 10%;
     left: 47%
 }
@@ -51,13 +52,13 @@ main, .overlay {
     height: 20px
 }
 
-.slice-1 {top:18px}
-.slice-2 {top:45px}
-.slice-3 {top:72px}
-.slice-4 {top:99px}
-.slice-5 {top:126px}
-.slice-6 {top:153px}
-.slice-7 {top:180px}
+.slice-1 {top:5px}
+.slice-2 {top:22px}
+.slice-3 {top:44px}
+.slice-4 {top:66px}
+.slice-5 {top:88px}
+.slice-6 {top:110px}
+.slice-7 {top:132px}
 
 .overlay {
     position: fixed;
