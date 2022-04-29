@@ -58,8 +58,9 @@ class Sprite {
             duration,
             top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
+                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth) < 20)
+                && bound < 20)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
@@ -94,8 +95,9 @@ class Hero extends Sprite {
             duration,
             top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
+                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth) < 20)
+                && bound < 20)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
@@ -157,9 +159,9 @@ class Meat extends Sprite {
             duration,
             top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
+                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && (0 < stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth < 20)
-                || (stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth < 20))
+                && bound < 20)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
