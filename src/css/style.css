@@ -64,7 +64,7 @@ main, .scenery {background: #afcfff}
 .overlay {
     position: fixed;
     display: flex;
-    /* z-index: 100; */
+    z-index: 100;
     background: #111;
     opacity: .7;
 }

@@ -4,6 +4,8 @@ import gsap from 'gsap'
 function onKeyDown(event) {
     switch(event.key)
         {
+            case "ф":
+            case "Ф":
             case 'a':
             case 'A':
             case 'Left':
@@ -14,6 +16,8 @@ function onKeyDown(event) {
                     left: stick.proto.offsetLeft-12
                 })
                 break
+            case 'в':
+            case 'В':
             case 'd':
             case 'D':
             case 'Right':
@@ -26,10 +30,23 @@ function onKeyDown(event) {
                 break
     }
 }
+function onTouch(event)
+{
+    const
+        touchX = event.changedTouches[0].clientX,
+        stickCenter = stick.proto.offsetWidth
+    if(0 < touchX && touchX + stickCenter < window.innerWidth)
+    gsap.to(stick.proto, {
+        duration: .04,
+        left: touchX
+    })
+}
 
 class MeatStick {constructor(){
     this.proto=document.querySelector('.player-stick')
     window.addEventListener("keydown", onKeyDown)
+    window.addEventListener("touchstart", onTouch)
+    window.addEventListener("touchmove", onTouch)
 }}
 
 const stickPositions = []
@@ -51,16 +68,18 @@ class Sprite {
         this.height = height
         this.fall()
     }
+    ifCollides() {
+        const bound = Math.abs(stick.proto.offsetLeft - 10 - this.proto.offsetLeft + (stick.proto.offsetWidth - this.proto.offsetWidth) / 2)
+        return stick.proto.offsetTop === this.proto.offsetHeight + this.proto.offsetTop && bound < this.width
+    }
 
     fall() {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight * .95 - scope.height}px`,
             onUpdate() {
-                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
-                if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && bound < 20)
+                if(scope.ifCollides())
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
@@ -93,11 +112,9 @@ class Hero extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight * .95 - scope.height}px`,
             onUpdate() {
-                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
-                if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && bound < 20)
+                if(scope.ifCollides())
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
@@ -157,11 +174,9 @@ class Meat extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: `${innerHeight * .95 - scope.height}px`,
+            top: `${window.innerHeight * .95 - scope.height}px`,
             onUpdate() {
-                const bound = Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth / 2)
-                if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && bound < 20)
+                if(scope.ifCollides())
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
@@ -198,6 +213,8 @@ function startGame()
     stickPositions.splice(0, stickPositions.length)
     document.querySelector('.overlay').style.display = 'none'
     window.addEventListener('keydown', onKeyDown),
+    window.addEventListener("touchstart", onTouch),
+    window.addEventListener("touchmove", onTouch),
     [...document.querySelectorAll('.slice')].forEach(slice => {slice.classList.add('hidden')}),
     [...document.querySelectorAll('.box')].forEach(box => {
         box.classList.add('unclaimed')
@@ -247,6 +264,8 @@ const overlay = document.querySelector('.overlay')
 
 function clean() {
     window.removeEventListener("keydown", onKeyDown)
+    window.removeEventListener("touchstart", onTouch)
+    window.removeEventListener("touchmove", onTouch)
     if(summonBox)
     {
         clearInterval(summonBox)
