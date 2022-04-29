@@ -37,7 +37,7 @@ main {background: #afcfff}
 .player-stick { 
     width: 100px;
     height: 200px;
-    background: transparent url("/assets/hand.png") center center no-repeat;
+    background: transparent url("/src/assets/hand.png") center center no-repeat;
     background-size: cover;
     bottom: 0;
     z-index: 11;

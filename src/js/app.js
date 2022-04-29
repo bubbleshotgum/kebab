@@ -105,7 +105,7 @@ class Sprite {
 class Hero extends Sprite {
     constructor(width, height)
     {
-        super(document.querySelector('.hero-box.unclaimed'), "url('/assets/char.png')", width, height)
+        super(document.querySelector('.hero-box.unclaimed'), "url('/src/assets/char.png')", width, height)
     }
 
     fall() {
@@ -141,33 +141,33 @@ class Dummy extends Sprite {
 }
 class Rat extends Dummy {
     constructor() {
-        super("url('/assets/mouse.png')")
+        super("url('/src/assets/mouse.png')")
     }
 }
 class Crow extends Dummy {
     constructor() {
-        super("url('/assets/crow.png')")
+        super("url('/src/assets/crow.png')")
     }
 }
 class Poo extends Dummy {
     constructor() {
-        super("url('/assets/poo.png')")
+        super("url('/src/assets/poo.png')")
     }
 }
 class Tomato extends Dummy {
     constructor() {
-        super("url('/assets/tomato.png')")
+        super("url('/src/assets/tomato.png')")
     }
 }
 class Onion extends Dummy {
     constructor() {
-        super("url('/assets/onion.png')")
+        super("url('/src/assets/onion.png')")
     }
 }
 class Meat extends Sprite {
     constructor(width, height)
     {
-        super(document.querySelector('.meat-box.unclaimed'), "url('/assets/meat.png')", width, height)
+        super(document.querySelector('.meat-box.unclaimed'), "url('/src/assets/meat.png')", width, height)
     }
 
     fall() {
