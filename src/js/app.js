@@ -81,6 +81,7 @@ class Sprite {
             onUpdate() {
                 if(scope.ifCollides())
                 {
+                    (new Audio("/src/audio/match.mp3")).play()
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
                     delete this
@@ -102,6 +103,9 @@ class Sprite {
         })
     }
 }
+
+const gameOverSound = new Audio("/src/audio/end_game.oga")
+
 class Hero extends Sprite {
     constructor(width, height)
     {
@@ -116,6 +120,8 @@ class Hero extends Sprite {
             onUpdate() {
                 if(scope.ifCollides())
                 {
+                    (new Audio("/src/audio/match.mp3")).play()
+                    gameOverSound.play()
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
                     revealSlice(getComputedStyle(scope.proto).getPropertyValue('background')),
@@ -178,6 +184,7 @@ class Meat extends Sprite {
             onUpdate() {
                 if(scope.ifCollides())
                 {
+                    (new Audio("/src/audio/match.mp3")).play()
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
                     delete this
@@ -207,11 +214,21 @@ function revealSlice(background) {
 }
 
 let summonBox = null
-
 function startGame()
 {
+    document.querySelector('.audio_btn').classList.add('hidden')
+    gameOverSound.pause()
+    start.pause()
+    if(toggled === true)
+    {
+        start.removeEventListener('ended', play)
+        toggled = null   
+    }
     stickPositions.splice(0, stickPositions.length)
-    document.querySelector('.overlay').style.display = 'none'
+    scaleGameOver.pause(0)
+    document.querySelector('.start').classList.add('hidden')
+    document.querySelector('.overlay_end').classList.add('hidden')
+    document.querySelector('.game').classList.remove('hidden')
     window.addEventListener('keydown', onKeyDown),
     window.addEventListener("touchstart", onTouch),
     window.addEventListener("touchmove", onTouch),
@@ -254,13 +271,13 @@ function startGame()
                 break
         }
     }, 1000)
+
 }
 
-startGame()
+document.querySelector('.start_btn').addEventListener('click', startGame)
+document.querySelector('.game_over_btn').addEventListener('click', startGame)
+document.querySelector('.form_btn').addEventListener('click', sendMail)
 
-document.querySelector('.restart').addEventListener('click', startGame)
-
-const overlay = document.querySelector('.overlay')
 
 function clean() {
     window.removeEventListener("keydown", onKeyDown)
@@ -274,19 +291,81 @@ function clean() {
     gsap.getTweensOf('.box').forEach(tween => {
         tween.kill()
     })
-    overlay.style.display = "flex"
 }
-
+let discount = null
 function success()
 {
     clean()
-    overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
-    overlay.children[0].children[1].style.display = "none"
-    overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
+    const count = stickPositions.reduce((old, curr) => old + curr)
+    const final = new Audio('/src/audio/final.mp4')
+    final.play()
+    document.querySelector('.overlay_form').classList.remove('hidden'),
+    document.querySelectorAll('.slice_count')[0].textContent = count,
+    document.querySelectorAll('.slice_count')[1].textContent = discount = count * 1000
+    console.log(discount)
+    // overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
+    // overlay.children[0].children[1].style.display = "none"
+    // overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
 }
+
+const scaleGameOver = gsap
+.from('.game_over', {
+    duration: 2,
+    scale: .4,
+    ease: "elastic.out(1, 0.5)",
+})
+scaleGameOver.pause(0)
 
 function gameOver()
 {
     clean()
-    overlay.children[0].style.display = overlay.children[0].children[1].style.display = "block"
+    document.querySelector('.overlay_end').classList.remove('hidden')
+    scaleGameOver.play()
+    // overlay.children[0].style.display = overlay.children[0].children[1].style.display = "block"
 }
+
+
+const form = document.querySelector('form')
+form.addEventListener('submit', sendMail)
+
+async function sendMail(e) {
+    e.preventDefault()
+
+    fetch('./mail.php', {
+        method: "POST",
+        headers: {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",    
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            name: document.querySelector("#name").value,
+            phone: document.querySelector("#phone").value,
+            email: document.querySelector("#email").value,
+            discount
+        })
+    }).then(res => res.json()).then(res => console.log(res))
+
+    form.reset()
+    document.querySelector('.overlay_form').classList.add('hidden')
+    document.querySelector('.overlay_sale').classList.remove('hidden')
+    // const data = [...new FormData(form)].map(input => input[1])
+    // console.log(data)
+    // form.submit()
+    // return false
+}
+
+
+const start = new Audio("/src/audio/start.wav")
+let toggled = false
+function play() {
+    start.play()
+    if(! toggled)
+    {
+        start.addEventListener('ended', play)
+        toggled = true
+    }
+    document.querySelector('.audio_btn').removeEventListener('click', play)
+}
+document.querySelector('.audio_btn').addEventListener('click', play)

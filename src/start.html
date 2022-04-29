@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRmNWI4NGUxLTU2Y2ItNDViZi05OTRkLTBmZDc2YTEzMzVkNyJ9">
+    <title>Start</title>
+    <link rel="stylesheet" href="./css/start.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <main class="start">
+
+        <img class="start_sun" src="./images/sun.png" alt="">
+
+        <img class="start_cloud" src="./images/cloud.png" alt="">
+        <img class="start_cloud-left" src="./images/cloud.png" alt="">
+        <img class="start_cloud-right" src="./images/cloud.png" alt="">
+
+        <img class="start_airshipping" src="./images/airshippng.png" alt="">
+        
+        <img class="start_ballon-one" src="./images/ballons.png" alt="">
+        <img class="start_ballon-two" src="./images/ballons.png" alt="">
+
+        <img class="start_char" src="./images/char_srart.png" alt="">
+
+        <div class="start_go">
+            <div class="start_title">Пожарь шашлык</div>
+            <div class="start_subtitle">
+                и выигрывай призы вместе с Bonnie и Slide
+            </div>
+
+            <button class="start_btn">
+                играть
+            </button>
+        </div>
+
+    </main>
+
+    <section class="game hidden">
+        <div class="playground">
+            <!-- <div class="scenery"></div> -->
+            <div> 
+                <div class="game_cloud"></div>
+                <div class="game_cloud--two"></div>
+                <div class="game_cloud--three"></div>
+                <div class="game_cloud--four"></div>
+                <div class="game_cloud--five"></div>
+
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed hero-box"></div>
+                <div class="box unclaimed hero-box"></div>
+                <div class="box unclaimed hero-box"></div>
+                <div class="box unclaimed meat-box"></div>
+                <div class="box unclaimed meat-box"></div>
+                <div class="box unclaimed meat-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+                <div class="box unclaimed stuff-box"></div>
+            </div>
+            
+            <div class="player-stick">
+                <div class="slices">
+                    <div class="slice slice-1 hidden"></div>
+                    <div class="slice slice-2 hidden"></div>
+                    <div class="slice slice-3 hidden"></div>
+                    <div class="slice slice-4 hidden"></div>
+                    <div class="slice slice-5 hidden"></div>
+                    <div class="slice slice-6 hidden"></div>
+                    <div class="slice slice-7 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- overlay -->
+
+    <!-- Конец игры -->
+    <div class="overlay_end hidden">
+        <img class="game_over" src="./images/game_over.png" alt="">
+        <button class="game_over_btn">
+            Играть ещё раз
+        </button>
+    </div>
+
+
+    <!-- Ваша скидка -->
+    <div class="overlay_sale hidden">
+        
+        <img class="hand_two" src="./images/hand_two.png" alt="">
+        <img class="hand_three" src="./images/hand_three.png" alt="">
+        <img class="smoke" src="./images/smoke.png" alt="">
+        <div >
+            <div class="overlay_sale-title">
+                Ты собрал <span class="slice_count"></span> кусочков 
+                <br>
+                <span class="title-pink">И выиграл скидку в <span class="slice_count"></span> рублей</span>
+                <br>
+                <span class="title-light">на курс «Стань дизайнером презентаций»</span>
+            </div>
+            <div class="title-light--two">А также жди звонка менеджера <br> и он расскажет, как получить <br> настоящий шашлык </div>
+        </div>
+       
+        <div class="fire-wrapper">
+            <div class="mo-fire">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="125px" height="189.864px" viewBox="0 0 125 189.864" enable-background="new 0 0 125 189.864" xml:space="preserve">
+                    <path class="flame-main" fill="#BA2C40" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+                        c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+                        c6.806,41.899,16.831,45.301,6.088,53.985"/>
+                    <path class="flame-main one" fill="#F60C50" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+                        c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"/>
+                    <path class="flame-main two" fill="#BB2C40" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+                        C84.858,184.21,125.705,150.905,81.657,79.192z"/>
+                    <path class="flame-main three" fill="#F60C50" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+                        C95.354,106.319,99.92,114.108,99.92,101.754z"/>
+                    <path class="flame-main four" fill="#CA2444" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+                        S134.387,164.603,103.143,105.917z"/>
+                    <path class="flame-main five" fill="#F60C50" d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"/>
+                    <path class="flame" fill="#F60C50" d="M101.011,112.926c0,0,8.973,10.519,4.556,16.543C99.37,129.735,106.752,117.406,101.011,112.926z"/>
+                    <path class="flame one" fill="#F60C50" d="M55.592,126.854c0,0-3.819,13.29,2.699,16.945C64.038,141.48,55.907,132.263,55.592,126.854z"/>
+                    <path class="flame two" fill="#F60C50" d="M54.918,104.595c0,0-3.959,6.109-1.24,8.949C56.93,113.256,52.228,107.329,54.918,104.595z"/>
+                </svg>
+            </div>
+            <div class="mo-fire--two">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="125px" height="189.864px" viewBox="0 0 125 189.864" enable-background="new 0 0 125 189.864" xml:space="preserve">
+                    <path class="flame-main" fill="#BA2C40" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+                        c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+                        c6.806,41.899,16.831,45.301,6.088,53.985"/>
+                    <path class="flame-main one" fill="#F60C50" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+                        c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"/>
+                    <path class="flame-main two" fill="#BB2C40" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+                        C84.858,184.21,125.705,150.905,81.657,79.192z"/>
+                    <path class="flame-main three" fill="#F60C50" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+                        C95.354,106.319,99.92,114.108,99.92,101.754z"/>
+                    <path class="flame-main four" fill="#CA2444" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+                        S134.387,164.603,103.143,105.917z"/>
+                    <path class="flame-main five" fill="#F60C50" d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"/>
+                    <path class="flame" fill="#F60C50" d="M101.011,112.926c0,0,8.973,10.519,4.556,16.543C99.37,129.735,106.752,117.406,101.011,112.926z"/>
+                    <path class="flame one" fill="#F60C50" d="M55.592,126.854c0,0-3.819,13.29,2.699,16.945C64.038,141.48,55.907,132.263,55.592,126.854z"/>
+                    <path class="flame two" fill="#F60C50" d="M54.918,104.595c0,0-3.959,6.109-1.24,8.949C56.93,113.256,52.228,107.329,54.918,104.595z"/>
+                </svg>
+            </div>
+            <div class="mo-fire--three">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        width="125px" height="189.864px" viewBox="0 0 125 189.864" enable-background="new 0 0 125 189.864" xml:space="preserve">
+                    <path class="flame-main" fill="#BA2C40" d="M76.553,186.09c0,0-10.178-2.976-15.325-8.226s-9.278-16.82-9.278-16.82s-0.241-6.647-4.136-18.465
+                        c0,0,3.357,4.969,5.103,9.938c0,0-5.305-21.086,1.712-30.418c7.017-9.333,0.571-35.654-2.25-37.534c0,0,13.07,5.64,19.875,47.54
+                        c6.806,41.899,16.831,45.301,6.088,53.985"/>
+                    <path class="flame-main one" fill="#F60C50" d="M61.693,122.257c4.117-15.4,12.097-14.487-11.589-60.872c0,0,32.016,10.223,52.601,63.123
+                        c20.585,52.899-19.848,61.045-19.643,61.582c0.206,0.537-19.401-0.269-14.835-18.532S57.576,137.656,61.693,122.257z"/>
+                    <path class="flame-main two" fill="#BB2C40" d="M81.657,79.192c0,0,11.549,24.845,3.626,40.02c-7.924,15.175-21.126,41.899-0.425,64.998
+                        C84.858,184.21,125.705,150.905,81.657,79.192z"/>
+                    <path class="flame-main three" fill="#F60C50" d="M99.92,101.754c0,0-23.208,47.027-12.043,80.072c0,0,32.741-16.073,20.108-45.79
+                        C95.354,106.319,99.92,114.108,99.92,101.754z"/>
+                    <path class="flame-main four" fill="#CA2444" d="M103.143,105.917c0,0,8.927,30.753-1.043,46.868c-9.969,16.115-14.799,29.041-14.799,29.041
+                        S134.387,164.603,103.143,105.917z"/>
+                    <path class="flame-main five" fill="#F60C50" d="M62.049,104.171c0,0-15.645,67.588,10.529,77.655C98.753,191.894,69.033,130.761,62.049,104.171z"/>
+                    <path class="flame" fill="#F60C50" d="M101.011,112.926c0,0,8.973,10.519,4.556,16.543C99.37,129.735,106.752,117.406,101.011,112.926z"/>
+                    <path class="flame one" fill="#F60C50" d="M55.592,126.854c0,0-3.819,13.29,2.699,16.945C64.038,141.48,55.907,132.263,55.592,126.854z"/>
+                    <path class="flame two" fill="#F60C50" d="M54.918,104.595c0,0-3.959,6.109-1.24,8.949C56.93,113.256,52.228,107.329,54.918,104.595z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Отправка данных -->
+    <div class="overlay_form hidden">
+        <div class="overlay_form-fire">
+            <img src="./images/smoke_2.png" alt="">
+        </div>
+        <div class="overlay_form-kebab"> 
+            <img src="/src/images/kebab.png" alt=""> 
+        </div>
+        <div class="overlay_form-title">
+            Мда, а у тебя получился <br> аппетитный шашлычок <br>
+            <span class="title-light">Оставь контакты и получи<br>свой приз</span>
+        </div>
+        <form action="" method="post">
+            <label for="name">Имя</label>
+            <input id="name" name="name" type="text" placeholder="">
+            
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" type="text" placeholder="">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="text" placeholder="">
+            <button class="form_btn">
+                Отправить
+            </button>
+        </form>
+    </div>
+    <button class="audio_btn"> 
+        <img src="./images/audio.png" alt=""> 
+    </button>
+    <script src="dist/js/app.js"></script>
+</body>
+</html>

@@ -7,23 +7,15 @@ html, body {
     overflow: hidden;
 }
 
-main {position: relative}
+.game {position: relative}
 
-main, .overlay {
+.game, .overlay {
     width: 100vw;
     height: 100vh
 }
 
-/* main, .scenery {background: #afcfff} */
-main {background: #afcfff}
+.game {background: #48EAFF}
 
-/* .scenery {
-    width: 100%;
-    height: 15%;
-    background: #99dd99;
-    bottom: 0;
-    z-index: 10
-} */
 
 .box {top: -32px}
 
@@ -67,26 +59,160 @@ main {background: #afcfff}
 .slice-6 {top:110px}
 .slice-7 {top:132px}
 
-.overlay {
-    position: fixed;
-    display: flex;
-    z-index: 100;
-    background: #111;
+.game_cloud {
+    
     opacity: .7;
-}
-
-.end-screen {
-    margin: auto;
-    width: 70%;
-    height: 50%;
-    border: 2px solid darkgreen;
-    background: #fff;
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    left: 10%;
+    /* transform: scale(1, -1); */
+    top: 10%;
+    background: url("../images/cloud.png") 50% 50% no-repeat;
+    background-size: contain;
     z-index: 100;
-    opacity: 1
+    animation: cloidmove4 15s ease-in-out infinite 0.7s;
+}
+.game_cloud--two {
+    width: 10%;
+    height: 20%;
+    position: absolute;
+    right: 50%;
+    top: 30%;
+    background: url("../images/cloud.png") 50% 50% no-repeat;
+    background-size: contain;
+    z-index: 100;
+    opacity: .7;
+    animation: cloidmove3 20s ease-in-out infinite 0.7s;
+}
+.game_cloud--three {
+    width: 20%;
+    height: 30%;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    background: url("../images/cloud.png") 50% 50% no-repeat;
+    background-size: contain;
+    z-index: 100;
+    
+    opacity: .7;
+    animation: cloidmove2 15s ease-in-out infinite 0.7s;
+}
+.game_cloud--four {
+    
+    opacity: .7;
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    right: 10%;
+    top: 35%;
+    background: url("../images/cloud.png") 50% 50% no-repeat;
+    background-size: contain;
+    z-index: 100;
+    animation: cloidmove 20s ease-in-out infinite 0.5s;
+}
+.game_cloud--five {
+    
+    opacity: .7;
+    width: 15%;
+    height: 15%;
+    position: absolute;
+    left: 0%;
+    bottom: 30%;
+    background: url("../images/cloud.png") 50% 50% no-repeat;
+    background-size: contain;
+    z-index: 100;
+    animation: cloidmove5 20s ease-in-out infinite 0.5s;
 }
 
-.overlay, .end-screen, .success-message, .gameover-message {display: none}
+@keyframes cloidmove {
 
-.success-message, .gameover-message {
-    padding: 25px;
+    0% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(40%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes cloidmove2 {
+
+    0% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(40%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes cloidmove3 {
+
+    0% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes cloidmove4 {
+
+    0% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(60%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes cloidmove5 {
+
+    0% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(30%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@media(max-width: 560px) {
+    .game_cloud {
+        width: 40%;
+        top: 20%;
+    }   
+    .game_cloud--two{
+        width: 40%;
+        top: 0;
+        
+    }   
+    .game_cloud--three{
+        width: 30%;
+        top: 20%;
+
+    }   
+    .game_cloud--four{
+        width: 30%;
+        top: 50%;
+        right: 0;
+
+    }   
+    .game_cloud--five{
+        width: 30%;
+
+    }   
 }
