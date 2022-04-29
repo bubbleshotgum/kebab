@@ -3,20 +3,19 @@
     padding: 0
 }
 
-main {
-    position: relative;
-    background: #afcfff
-}
+main {position: relative}
 
 main, .overlay {
     width: 100vw;
     height: 100vh
 }
 
+main, .scenery {background: #afcfff}
+
 .scenery {
     width: 100%;
-    height: 10%;
-    background: #99dd99;
+    height: 15%;
+    /* background: #99dd99; */
     bottom: 0;
     z-index: 10
 }
@@ -30,11 +29,12 @@ main, .overlay {
 .player-stick, .box, .scenery, .slice {position: absolute}
 
 .player-stick { 
-    width: 24px;
+    width: 100px;
     height: 200px;
     background: transparent url("/assets/hand.png") center center no-repeat;
     background-size: cover;
-    bottom: 10%;
+    bottom: 0;
+    z-index: 11;
     left: 47%
 }
 
@@ -50,7 +50,7 @@ main, .overlay {
 .slice {
     width: 100%;
     height: 20px;
-    left: -7px;
+    left: 30px
 }
 
 .slice-1 {top:5px}

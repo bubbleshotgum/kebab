@@ -8,6 +8,7 @@ function onKeyDown(event) {
             case 'A':
             case 'Left':
             case 'ArrowLeft':
+                if(stick.proto.offsetLeft > 0)
                 gsap.to(stick.proto, {
                     duration: .04,
                     left: stick.proto.offsetLeft-12
@@ -16,7 +17,8 @@ function onKeyDown(event) {
             case 'd':
             case 'D':
             case 'Right':
-            case 'ArrowRight':
+            case 'ArrowRight':    
+                if(stick.proto.offsetLeft + stick.proto.offsetWidth + 12 < window.innerWidth)
                 gsap.to(stick.proto, {
                     duration: .04,
                     left: stick.proto.offsetLeft+12
@@ -27,7 +29,6 @@ function onKeyDown(event) {
 
 class MeatStick {constructor(){
     this.proto=document.querySelector('.player-stick')
-
     window.addEventListener("keydown", onKeyDown)
 }}
 
@@ -55,10 +56,10 @@ class Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: "95vh",
+            top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
+                && Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth) < 20)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
@@ -91,10 +92,10 @@ class Hero extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: "95vh",
+            top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
+                && Math.abs(stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth) < 20)
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
@@ -154,10 +155,11 @@ class Meat extends Sprite {
         const scope = this
         const fallAnimation = gsap.to(scope.proto, {
             duration,
-            top: "95vh",
+            top: `${innerHeight * .95 - scope.height}px`,
             onUpdate() {
                 if(stick.proto.offsetTop == scope.proto.offsetHeight + scope.proto.offsetTop
-                && Math.abs(stick.proto.offsetLeft - scope.proto.offsetLeft) < scope.proto.offsetWidth)
+                && (0 < stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth < 20)
+                || (stick.proto.offsetLeft + stick.proto.offsetWidth / 2 - scope.proto.offsetLeft - scope.proto.offsetWidth < 20))
                 {
                     fallAnimation.pause(), fallAnimation.kill()
                     const proto = scope.proto, height = scope.height
