@@ -76,8 +76,10 @@ class Sprite {
         this.fall()
     }
     ifCollides() {
-        const bound = Math.abs(stick.proto.offsetLeft - this.proto.offsetLeft + (stick.proto.offsetWidth - this.proto.offsetWidth) / 2)
-        return stick.proto.offsetTop === this.proto.offsetHeight + this.proto.offsetTop && bound < this.width / 2
+        const bound = Math.abs(stick.proto.offsetLeft - this.proto.offsetLeft + (stick.proto.offsetWidth - this.proto.offsetWidth) / 2),
+            boundTop = this.proto.offsetHeight + this.proto.offsetTop - stick.proto.offsetTop
+        // console.log(boundTop)
+        return 0 <= boundTop && boundTop <= 5 && bound < this.width / 2
     }
 
     fall() {
@@ -128,7 +130,6 @@ class Hero extends Sprite {
                 if(scope.ifCollides())
                 {
                     (new Audio("/src/audio/match.mp3")).play()
-                    gameOverSound.play()
                     fallAnimation.pause(), fallAnimation.kill()
                     stickPositions.push(null)
                     revealSlice(getComputedStyle(scope.proto).getPropertyValue('background')),
@@ -223,14 +224,10 @@ function revealSlice(background) {
 let summonBox = null
 function startGame()
 {
+    // if(start.paused)
+    //     start.play()
     document.querySelector('.audio_btn').classList.add('hidden')
     gameOverSound.pause()
-    start.pause()
-    if(toggled === true)
-    {
-        start.removeEventListener('ended', play)
-        toggled = null   
-    }
     stickPositions.splice(0, stickPositions.length)
     scaleGameOver.pause(0)
     document.querySelector('.start').classList.add('hidden')
@@ -287,6 +284,13 @@ document.querySelector('.form_btn').addEventListener('click', sendMail)
 
 
 function clean() {
+    start.pause()
+    start.currentTime = 0
+    // if(toggled === true)
+    // {
+    //     start.removeEventListener('ended', play)
+    //     toggled = null   
+    // }
     window.removeEventListener("keydown", onKeyDown)
     window.removeEventListener("touchstart", onTouch)
     window.removeEventListener("touchmove", onTouch)
@@ -304,10 +308,17 @@ function success()
 {
     clean()
     const count = stickPositions.reduce((old, curr) => old + curr)
+    if(count === 0)
+        return gameOver()
+    if(toggled === true)
+    {
+        start.removeEventListener('ended', toggleStartAudio)
+        toggled = null   
+    }
     const output = document.querySelector('.output')
     if(count === 1)
         output.textContent = 'кусочек'
-    else if(count && count < 5)    
+    else if(count < 5)    
         output.textContent = 'кусочка'
     else 
         output.textContent = 'кусочков'
@@ -316,10 +327,6 @@ function success()
     document.querySelector('.overlay_form').classList.remove('hidden'),
     document.querySelectorAll('.slice_count')[0].textContent = count,
     document.querySelectorAll('.slice_count')[1].textContent = discount = count * 1000
-    console.log(discount)
-    // overlay.children[0].children[0].children[0].children[0].textContent = stickPositions.reduce((old, curr) => old + curr) * 1000
-    // overlay.children[0].children[1].style.display = "none"
-    // overlay.children[0].style.display = overlay.children[0].children[0].style.display = "block"
 }
 
 const scaleGameOver = gsap
@@ -333,6 +340,8 @@ scaleGameOver.pause(0)
 function gameOver()
 {
     clean()
+    gameOverSound.currentTime = 0
+    gameOverSound.play()
     document.querySelector('.overlay_end').classList.remove('hidden')
     scaleGameOver.play()
     // overlay.children[0].style.display = overlay.children[0].children[1].style.display = "block"
@@ -373,13 +382,29 @@ async function sendMail(e) {
 
 const start = new Audio("/src/audio/start.wav")
 let toggled = false
-function play() {
-    start.play()
-    if(! toggled)
+let assigned = false
+
+function playStartAudio()
+{
+    if(!assigned)
     {
-        start.addEventListener('ended', play)
-        toggled = true
+        start.addEventListener('ended', toggleStartAudio)
+        assigned = true
     }
-    document.querySelector('.audio_btn').removeEventListener('click', play)
+    start.play()
+} 
+
+function toggleStartAudio() {
+    if(! toggled)
+        playStartAudio()
+    else
+    {
+        start.removeEventListener('ended', toggleStartAudio)    
+        start.pause()
+        start.currentTime = 0
+        assigned = false
+    }
+    toggled = ! toggled
+    // document.querySelector('.audio_btn').removeEventListener('click', play)
 }
-document.querySelector('.audio_btn').addEventListener('click', play)
+document.querySelector('.audio_btn').addEventListener('click', toggleStartAudio)

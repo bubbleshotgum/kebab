@@ -1,0 +1,100 @@
+$height: 30 / 16 * 1em;
+$width: 72 / 16 * 1em;
+$transition-default: 0.25s ease-out 0.10s;
+$color-white: #fefefe;
+$color-silver: #bdc3c7;
+$color-carrot: #e67e22;
+
+.button-switch {
+    font-size: 1.5em;
+    height: $height;
+    margin-bottom: 10 / 16 * 1em;
+    position: relative;
+    width: $width;
+  
+    .lbl-off,
+    .lbl-on {
+      cursor: pointer;
+      display: block;
+      font-size: 0.9em;
+      font-weight: bold;
+      line-height: 1em;
+      position: absolute;
+      top: 8 / 16 * 1em;
+      transition: opacity $transition-default;
+      text-transform: uppercase;
+    }
+  
+    .lbl-off {
+      right: 7 / 16 * 1em;
+    }
+  
+    .lbl-on {
+      color: $color-white;
+      opacity: 0;
+      left: 7 / 16 * 1em;
+    }
+  
+    .switch {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      // --
+      height: 0;
+      font-size: 1em;
+      left: 0;
+      line-height: 0;
+      outline: none;
+      position: absolute;
+      top: 0;
+      width: 0;
+  
+      &:before,
+      &:after {
+        content: '';
+        font-size: 1em;
+        position: absolute;
+      }
+  
+      &:before {
+        border-radius: 20 / 16 * 1em;
+        background: $color-silver;
+        height: $height;
+        left: 4 / 16 * -1em;
+        top: 3 / 16 * -1em;
+        transition: background-color $transition-default;
+        width: $width;
+      }
+  
+      &:after {
+        box-shadow: 0 .0625em .375em 0 #666;
+        border-radius: 50%;
+        background: $color-white;
+        height: 24 / 16 * 1em;
+        transform: translate(0, 0);
+        transition: transform $transition-default;
+        width: 24 / 16 * 1em;
+      }
+  
+      &:checked {
+        &:after {
+          transform: translate(40 / 16 * 1em, 0);
+        }
+  
+        & ~ .lbl-off {
+          opacity: 0;
+        }
+  
+        & ~ .lbl-on {
+          opacity: 1;
+        }
+      }
+  
+      &#switch-orange {
+        &:checked:before {
+          background: $color-carrot;
+        }
+      }
+    }
+  }
+  

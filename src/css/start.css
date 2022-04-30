@@ -1,3 +1,5 @@
+@import url("./btn_switch.css");
+
 @font-face {
     font-family: "Dinpro_medium"; 
     src: url("../fonts/dinpro_condensedmedium.otf") format("truetype"); 
@@ -676,8 +678,8 @@ label {
     width: 60px; 
     height: 60px; 
     padding: 10px; 
-    border-radius: 100%; 
-    background: yellow; 
+    /* border-radius: 100%;  */
+    /* background: yellow;  */
     border: none; 
 } 
 .audio_btn img { 
