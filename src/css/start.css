@@ -164,13 +164,6 @@ span.game_over {
     text-align: center;
     color: #ff0453;
 }
-
-@media screen and (max-width: 560px)
-{
-    span.game_over {
-        font-size: 36px;
-    }
-}
 .game_over_btn {
     font-family: "Dinpro_medium";
     width: 190px;
@@ -593,8 +586,11 @@ label {
 }
 
 @media(max-width: 560px) {
+    span.game_over {
+        font-size: 36px;
+    }
     .start_go {
-        padding-top: 120px;
+        padding-top: 180px;
     }
     .start_title {
         line-height: 85%;
