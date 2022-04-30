@@ -83,6 +83,7 @@
     <!-- Конец игры -->
     <div class="overlay_end hidden">
         <img class="game_over" src="./images/game_over.png" alt="">
+        <span class="game_over hidden">Для того, чтобы<br>пожарить шашлык,<br>нужно мясо</span>
         <button class="game_over_btn">
             Играть ещё раз
         </button>
@@ -185,12 +186,28 @@
         </div>
         <form action="" method="post">
             <label for="name">Имя</label>
-            <input id="name" name="name" type="text" placeholder="">
-            
+            <input
+                pattern="[а-яА-Яa-zA-Z]+ ?[а-яА-Яa-zA-Z]+"
+                title="Имя с фамилией по желанию"
+                required
+                id="name"
+                name="name"
+                type="text">
             <label for="phone">Телефон</label>
-            <input id="phone" name="phone" type="text" placeholder="">
+            <input
+                title="Номер телефона в формате +7 (999) 999-9999"
+                required
+                id="phone"
+                name="phone"
+                type="text">
             <label for="email">Email</label>
-            <input id="email" name="email" type="text" placeholder="">
+            <input
+                pattern="[^@.\s]+@[^@.\s]+\.\w+"
+                title="Адрес электронной почты. Пример: ex@mple.com"
+                required
+                id="email"
+                name="email"
+                type="text">
             <button class="form_btn">
                 Отправить
             </button>
@@ -199,11 +216,21 @@
     <!-- <button class="audio_btn"> 
         <img src="./images/audio.png" alt=""> 
     </button> -->
-    <div class="button-switch audio_btn">
-        <input type="checkbox" id="switch-orange" class="switch" />
-        <label for="switch-orange" class="lbl-off">Off</label>
-        <label for="switch-orange" class="lbl-on">On</label>
+    <div class="button-switch">
+        <input type="checkbox" id="switch-orange" class="switch audio_btn" />
+        <label for="switch-orange" class="lbl-off">выкл</label>
+        <label for="switch-orange" class="lbl-on">вкл</label>
     </div>
     <script src="dist/js/app.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="./dist/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        // $(document).on("ready",function(){
+            $("#phone").mask("+7 (999) 999-9999", { placeholder: "+7 (___) ___-____" })
+        // })
+    </script>
 </body>
 </html>

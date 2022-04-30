@@ -135,6 +135,8 @@ class Hero extends Sprite {
                     revealSlice(getComputedStyle(scope.proto).getPropertyValue('background')),
                     scope.proto.style.top = `-${scope.height}px`
                     delete this
+                    document.querySelector('img.game_over').classList.remove('hidden')
+                    document.querySelector('span.game_over').classList.add('hidden')  
                     gameOver()
                 }
             },
@@ -224,9 +226,9 @@ function revealSlice(background) {
 let summonBox = null
 function startGame()
 {
-    // if(start.paused)
-    //     start.play()
-    document.querySelector('.audio_btn').classList.add('hidden')
+    if(!toggled)
+        toggleStartAudio()
+    document.querySelector('.audio_btn').parentNode.classList.add('hidden')
     gameOverSound.pause()
     stickPositions.splice(0, stickPositions.length)
     scaleGameOver.pause(0)
@@ -284,8 +286,8 @@ document.querySelector('.form_btn').addEventListener('click', sendMail)
 
 
 function clean() {
-    start.pause()
-    start.currentTime = 0
+    if(toggled)
+        toggleStartAudio()
     // if(toggled === true)
     // {
     //     start.removeEventListener('ended', play)
@@ -309,11 +311,10 @@ function success()
     clean()
     const count = stickPositions.reduce((old, curr) => old + curr)
     if(count === 0)
-        return gameOver()
-    if(toggled === true)
     {
-        start.removeEventListener('ended', toggleStartAudio)
-        toggled = null   
+        document.querySelector('img.game_over').classList.add('hidden')
+        document.querySelector('span.game_over').classList.remove('hidden')  
+        return gameOver()
     }
     const output = document.querySelector('.output')
     if(count === 1)
@@ -354,29 +355,36 @@ form.addEventListener('submit', sendMail)
 async function sendMail(e) {
     e.preventDefault()
 
-    fetch('./mail.php', {
-        method: "POST",
-        headers: {
-            "Accept": "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-            "X-Requested-With": "XMLHttpRequest",    
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify({
-            name: document.querySelector("#name").value,
-            phone: document.querySelector("#phone").value,
-            email: document.querySelector("#email").value,
-            discount
-        })
-    }).then(res => res.json()).then(res => console.log(res))
-
+    if(document.querySelector('input:invalid'))
+    {
+        console.log(document.querySelectorAll('input:invalid'))
+        const span = document.querySelector('.overlay_form-title > span')
+        span.innerHTML = "Данные введены неверно<br>Проверь правильность телефона и почты"
+        span.style.color = "#dd3277"
+        document.querySelector
+    }
+    else {
+        fetch('./mail.php', {
+            method: "POST",
+            headers: {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",    
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({
+                name: document.querySelector("#name").value,
+                phone: document.querySelector("#phone").value,
+                email: document.querySelector("#email").value,
+                discount
+            })
+        }).then(res => res.json()).then(res => console.log(res))
+        setTimeout( () => {
+        document.querySelector('.overlay_form').classList.add('hidden')
+        document.querySelector('.overlay_sale').classList.remove('hidden')
+        }, 500)
+    }
     form.reset()
-    document.querySelector('.overlay_form').classList.add('hidden')
-    document.querySelector('.overlay_sale').classList.remove('hidden')
-    // const data = [...new FormData(form)].map(input => input[1])
-    // console.log(data)
-    // form.submit()
-    // return false
 }
 
 

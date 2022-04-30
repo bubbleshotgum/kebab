@@ -45,7 +45,7 @@
 }
 .button-switch .switch:before {
   border-radius: 1.25em;
-  background: #bdc3c7;
+  background: #dd3277;
   height: 1.875em;
   left: -0.25em;
   top: -0.1875em;
@@ -71,7 +71,7 @@
   opacity: 1;
 }
 .button-switch .switch#switch-orange:checked:before {
-  background: #e67e22;
+  background: #1cdd5a;
 }
 
 /*# sourceMappingURL=btn_switch.css.map */

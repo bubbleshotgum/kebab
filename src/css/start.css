@@ -157,6 +157,20 @@ body {
     width: 35vw;
 }
 
+span.game_over {
+    text-transform: uppercase;
+    margin: 10px auto;
+    font-size: 40px;
+    text-align: center;
+    color: #ff0453;
+}
+
+@media screen and (max-width: 560px)
+{
+    span.game_over {
+        font-size: 36px;
+    }
+}
 .game_over_btn {
     font-family: "Dinpro_medium";
     width: 190px;
@@ -670,19 +684,17 @@ label {
     }
 }
 
-.audio_btn { 
+input:invalid {
+    border: red solid 3px;
+}
+
+.button-switch { 
     position: absolute; 
     z-index: 10000; 
     bottom: 5%; 
-    right: 5%; 
-    width: 60px; 
-    height: 60px; 
+    right: 5%;
     padding: 10px; 
     /* border-radius: 100%;  */
     /* background: yellow;  */
     border: none; 
-} 
-.audio_btn img { 
-    width: 100%; 
-    height: 100%; 
 }
