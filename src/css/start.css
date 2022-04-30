@@ -590,22 +590,22 @@ label {
         font-size: 36px;
     }
     .start_go {
-        padding-top: 180px;
+        padding-top: 170px;
     }
     .start_title {
         line-height: 85%;
         padding: 0 30px;
         font-size: 64px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
     .start_subtitle {
         padding: 0 30px;
         font-size: 36px;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
     /* ===images */
     .start_char {
-        width: 90%;
+        width: 70%;
         bottom: 0;
     }
     .start_sun {
@@ -687,8 +687,8 @@ input:invalid {
 .button-switch { 
     position: absolute; 
     z-index: 10000; 
-    bottom: 5%; 
-    right: 5%;
+    bottom: 2%; 
+    right: 3%;
     padding: 10px; 
     /* border-radius: 100%;  */
     /* background: yellow;  */
