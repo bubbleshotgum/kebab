@@ -19,8 +19,13 @@
 body {
     font-family: "Dinpro_medium";
 }
-.start {
+
+.start, .overlay_end, .overlay_form, .overlay_sale {
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.start {
     background: #48EAFF;
     position: relative;
     overflow: hidden;
@@ -138,7 +143,6 @@ body {
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
     background: url("../images/end_bg.png") 50% 50% no-repeat;
     background-size: cover;
     display: flex;
@@ -225,7 +229,6 @@ body {
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
     background: #48EAFF;
     display: flex;
     align-items: center;
@@ -441,7 +444,6 @@ body {
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
     background: #48EAFF;
     display: flex;
     align-items: center;
@@ -576,7 +578,7 @@ label {
 
 @media(max-width: 560px) {
     .start_go {
-        padding-top: 250px;
+        padding-top: 120px;
     }
     .start_title {
         line-height: 85%;

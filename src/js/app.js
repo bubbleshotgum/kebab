@@ -1,5 +1,12 @@
 import gsap from 'gsap'
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
+
 
 function onKeyDown(event) {
     switch(event.key)
@@ -69,8 +76,8 @@ class Sprite {
         this.fall()
     }
     ifCollides() {
-        const bound = Math.abs(stick.proto.offsetLeft - 10 - this.proto.offsetLeft + (stick.proto.offsetWidth - this.proto.offsetWidth) / 2)
-        return stick.proto.offsetTop === this.proto.offsetHeight + this.proto.offsetTop && bound < this.width
+        const bound = Math.abs(stick.proto.offsetLeft - this.proto.offsetLeft + (stick.proto.offsetWidth - this.proto.offsetWidth) / 2)
+        return stick.proto.offsetTop === this.proto.offsetHeight + this.proto.offsetTop && bound < this.width / 2
     }
 
     fall() {
@@ -107,9 +114,9 @@ class Sprite {
 const gameOverSound = new Audio("/src/audio/end_game.oga")
 
 class Hero extends Sprite {
-    constructor(width, height)
+    constructor()
     {
-        super(document.querySelector('.hero-box.unclaimed'), "url('/src/assets/char.png')", width, height)
+        super(document.querySelector('.hero-box.unclaimed'), "url('/src/assets/char.png')")
     }
 
     fall() {
@@ -171,9 +178,9 @@ class Onion extends Dummy {
     }
 }
 class Meat extends Sprite {
-    constructor(width, height)
+    constructor()
     {
-        super(document.querySelector('.meat-box.unclaimed'), "url('/src/assets/meat.png')", width, height)
+        super(document.querySelector('.meat-box.unclaimed'), "url('/src/assets/meat.png')")
     }
 
     fall() {
