@@ -304,6 +304,13 @@ function success()
 {
     clean()
     const count = stickPositions.reduce((old, curr) => old + curr)
+    const output = document.querySelector('.output')
+    if(count === 1)
+        output.textContent = 'кусочек'
+    else if(count && count < 5)    
+        output.textContent = 'кусочка'
+    else 
+        output.textContent = 'кусочков'
     const final = new Audio('/src/audio/final.mp4')
     final.play()
     document.querySelector('.overlay_form').classList.remove('hidden'),
