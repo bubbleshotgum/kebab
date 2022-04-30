@@ -357,7 +357,7 @@ async function sendMail(e) {
 
     if(document.querySelector('input:invalid'))
     {
-        console.log(document.querySelectorAll('input:invalid'))
+        // console.log(document.querySelectorAll('input:invalid'))
         const span = document.querySelector('.overlay_form-title > span')
         span.innerHTML = "Данные введены неверно<br>Проверь правильность телефона и почты"
         span.style.color = "#dd3277"
