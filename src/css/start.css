@@ -694,3 +694,7 @@ input:invalid {
     /* background: yellow;  */
     border: none; 
 }
+
+.button-switch input {
+    border: none;
+}
